@@ -1,0 +1,25 @@
+{
+    "name": "devguru/smstraffic-api",
+    "description": "SMS Traffic API implementation",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Rodionov",
+            "email": "web@devgu.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "ext-libxml": "*",
+        "ext-pcre": "*",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload":     {
+        "psr-4": { "DevGuru\\SmsTrafficApi\\": "src/DevGuru/SmsTrafficApi" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DevGuru\\SmsTrafficApi\\Tests\\": "tests/DevGuru/SmsTrafficApi/Tests"
+        }
+    }
+}
