@@ -44,4 +44,14 @@ class SmsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $sms->getParameters());
     }
 
+    public function testMultiPhones()
+    {
+        $sms = new Sms(['Phones1', 'Phones2'], 'Message');
+        $expected = [
+            $sms::PARAMETER_ENCODING => $sms::ENCODING_UTF8,
+            $sms::PARAMETER_PHONES => 'Phones1,Phones2',
+            $sms::PARAMETER_MESSAGE => 'Message',
+        ];
+        $this->assertEquals($expected, $sms->getParameters());
+    }
 }
