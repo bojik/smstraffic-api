@@ -51,6 +51,16 @@ class Client
     protected $transport;
 
     /**
+     * @var callable
+     */
+    protected $preRequestCallback;
+
+    /**
+     * @var callable
+     */
+    protected $postRequestCallback;
+
+    /**
      * Client constructor.
      * @param string      $login Sms Traffic login
      * @param string      $password Sms Traffic Password
@@ -83,12 +93,21 @@ class Client
         $params[$sms::PARAMETER_ORIGINATOR] = $this->originator;
 
         try {
+            if (is_callable($this->preRequestCallback)) {
+                call_user_func_array($this->preRequestCallback, [$params, $this->apiUrl]);
+            }
             $result = $this->transport->doRequest($this->apiUrl, $params);
         } catch (Exception $e) {
             throw new TransportException($e->getMessage(), $e->getCode(), $e);
         }
 
-        return $this->parseSendingResult($result);
+        $ret = $this->parseSendingResult($result);
+
+        if (is_callable($this->postRequestCallback)) {
+            call_user_func_array($this->postRequestCallback, [$ret, $params, $this->apiUrl]);
+        }
+
+        return $ret;
     }
 
     /**
@@ -109,6 +128,30 @@ class Client
     public function setApiUrl($apiUrl)
     {
         $this->apiUrl = $apiUrl;
+
+        return $this;
+    }
+
+    /**
+     * Set callback function perform before API http request
+     * @param callable $preRequestCallback
+     * @return $this
+     */
+    public function setPreRequestCallback(callable $preRequestCallback)
+    {
+        $this->preRequestCallback = $preRequestCallback;
+
+        return $this;
+    }
+
+    /**
+     * Set callback function perform after API http request
+     * @param callable $postRequestCallback
+     * @return $this
+     */
+    public function setPostRequestCallback(callable $postRequestCallback)
+    {
+        $this->postRequestCallback = $postRequestCallback;
 
         return $this;
     }

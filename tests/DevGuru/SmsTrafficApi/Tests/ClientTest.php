@@ -45,4 +45,30 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->setTransport($transportMock);
         $client->send(new Sms('Phone', 'Message'));
     }
+
+    public function testCallbacks()
+    {
+        $transportMock = $this->getMock(TransportInterface::class);
+        $transportMock->method('doRequest')->willReturn('<?xml version="1.0" ?><reply><result>OK</result><code>0</code><description>queued 1 messages</description></reply>');
+
+        $client = new Client('login', 'password', 'originator');
+        $client->setTransport($transportMock);
+        $phpunit = $this;
+        $client->setPreRequestCallback(function ($params, $url) use ($phpunit) {
+            $phpunit->assertEquals(
+                ["rus" => 5, "phones" => "Phone", "message" => "Message", "login" => "login", "password" => "password", "originator" => "originator"],
+                $params
+            );
+            $phpunit->assertEquals(Client::DEFAULT_API_URL, $url);
+        });
+        $client->setPostRequestCallback(function($result, $params, $url) use ($phpunit) {
+            $phpunit->assertEquals(["result" => "OK", "code" => "0", "description" => "queued 1 messages"], $result);
+            $phpunit->assertEquals(
+                ["rus" => 5, "phones" => "Phone", "message" => "Message", "login" => "login", "password" => "password", "originator" => "originator"],
+                $params
+            );
+            $phpunit->assertEquals(Client::DEFAULT_API_URL, $url);
+        });
+        $client->send(new Sms('Phone', 'Message'));
+    }
 }
