@@ -9,17 +9,26 @@ use DevGuru\SmsTrafficApi\Transport\GuzzleHttpTransport;
 use DevGuru\SmsTrafficApi\Transport\TransportInterface;
 use Exception;
 
+/**
+ * Class Client
+ * @package DevGuru\SmsTrafficApi
+ */
 class Client
 {
     /**
      * API version
      */
-    const VERSION = '1.84';
+    const VERSION = '1.85';
 
     /**
      * API Url by default
      */
-    const DEFAULT_API_URL = 'https://www.smstraffic.ru/multi.php';
+    const DEFAULT_API_URL = 'https://api.smstraffic.ru/multi.php';
+
+    /**
+     * Reserved API Url
+     */
+    const RESERVE_API_URL = 'https://api2.smstraffic.ru/multi.php';
 
     /**
      * Sms Traffic Login
