@@ -1,6 +1,9 @@
 <?php
 namespace DevGuru\SmsTrafficApi\Sms;
 
+/**
+ * Class Sms
+ */
 class Sms extends AbstractSms
 {
     /**

@@ -3,6 +3,9 @@ namespace DevGuru\SmsTrafficApi\Sms;
 
 use DateTime;
 
+/**
+ * Class AbstractSms
+ */
 abstract class AbstractSms implements ConstInterface
 {
     /**

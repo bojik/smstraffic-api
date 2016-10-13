@@ -1,6 +1,9 @@
 <?php
 namespace DevGuru\SmsTrafficApi\Sms;
 
+/**
+ * Class IndividualSms
+ */
 class IndividualSms extends AbstractSms
 {
     protected $phoneMessages = [];
@@ -36,6 +39,7 @@ class IndividualSms extends AbstractSms
     {
         $ret = parent::getParameters();
         $ret[self::PARAMETER_PHONES] = $this->generatePhoneParameter();
+
         return $ret;
     }
 
@@ -48,6 +52,7 @@ class IndividualSms extends AbstractSms
         foreach ($this->phoneMessages as $param) {
             $ret[] = implode(' ', $param);
         }
+
         return implode("\n", $ret);
     }
 }

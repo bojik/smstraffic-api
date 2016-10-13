@@ -71,8 +71,8 @@ class Client
 
     /**
      * Client constructor.
-     * @param string      $login Sms Traffic login
-     * @param string      $password Sms Traffic Password
+     * @param string      $login      Sms Traffic login
+     * @param string      $password   Sms Traffic Password
      * @param string|null $originator Sms sender
      */
     public function __construct($login, $password, $originator = null)

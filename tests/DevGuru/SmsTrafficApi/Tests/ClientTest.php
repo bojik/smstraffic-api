@@ -5,8 +5,14 @@ use DevGuru\SmsTrafficApi\Client;
 use DevGuru\SmsTrafficApi\Sms\Sms;
 use DevGuru\SmsTrafficApi\Transport\TransportInterface;
 
+/**
+ * Class ClientTest
+ */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @throws \DevGuru\SmsTrafficApi\Exception\TransportException
+     */
     public function testSend()
     {
         $transportMock = $this->getMock(TransportInterface::class);
@@ -46,6 +52,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->send(new Sms('Phone', 'Message'));
     }
 
+    /**
+     * @throws \DevGuru\SmsTrafficApi\Exception\TransportException
+     */
     public function testCallbacks()
     {
         $transportMock = $this->getMock(TransportInterface::class);
@@ -61,7 +70,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             );
             $phpunit->assertEquals(Client::DEFAULT_API_URL, $url);
         });
-        $client->setPostRequestCallback(function($result, $params, $url) use ($phpunit) {
+        $client->setPostRequestCallback(function ($result, $params, $url) use ($phpunit) {
             $phpunit->assertEquals(["result" => "OK", "code" => "0", "description" => "queued 1 messages"], $result);
             $phpunit->assertEquals(
                 ["rus" => 5, "phones" => "Phone", "message" => "Message", "login" => "login", "password" => "password", "originator" => "originator"],
