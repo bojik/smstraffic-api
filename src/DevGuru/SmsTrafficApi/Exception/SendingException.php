@@ -1,6 +1,9 @@
 <?php
 namespace DevGuru\SmsTrafficApi\Exception;
 
+/**
+ * Class SendingException
+ */
 class SendingException extends SmsTrafficApiException
 {
     /**

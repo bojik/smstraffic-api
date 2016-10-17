@@ -1,6 +1,9 @@
 <?php
 namespace DevGuru\SmsTrafficApi\Sms;
 
+/**
+ * Interface ConstInterface
+ */
 interface ConstInterface
 {
     /**

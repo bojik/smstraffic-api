@@ -1,6 +1,9 @@
 <?php
 namespace DevGuru\SmsTrafficApi\Transport;
 
+/**
+ * Interface TransportInterface
+ */
 interface TransportInterface
 {
     /**

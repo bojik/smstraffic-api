@@ -3,8 +3,15 @@ namespace DevGuru\SmsTrafficApi\Tests\Sms;
 
 use DevGuru\SmsTrafficApi\Sms\IndividualSms;
 
+/**
+ * Class IndividualSmsTest
+ * @package DevGuru\SmsTrafficApi\Tests\Sms
+ */
 class IndividualSmsTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * testGetParameters
+     */
     public function testGetParameters()
     {
         $sms = new IndividualSms([['78001231231', 'First Message']]);

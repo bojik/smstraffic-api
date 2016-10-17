@@ -3,6 +3,9 @@ namespace DevGuru\SmsTrafficApi\Transport;
 
 use GuzzleHttp\Client as HttpClient;
 
+/**
+ * Class GuzzleHttpTransport
+ */
 class GuzzleHttpTransport implements TransportInterface
 {
     const REQUEST_TIMEOUT = 120;
